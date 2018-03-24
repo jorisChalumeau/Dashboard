@@ -1,0 +1,12 @@
+// Spring Roo 2.0.0.RC2 [rev 76d128f] log opened at 2018-03-24 15:57:18
+project setup --topLevelPackage com.foo
+hint
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY 
+entity jpa --class ~.domain.Timer
+field string --fieldName message --notNull
+repository jpa --all
+service --all
+web mvc setup
+web mvc view setup --type THYMELEAF
+web mvc controller --all --responseType THYMELEAF 
+web mvc controller --all --pathPrefix /api
