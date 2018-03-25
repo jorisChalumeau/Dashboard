@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="main-style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
+    <script type="text/javascript" src="main-script.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>var socket = io('http://localhost:8080');
+    $(document).ready(function () {
+        $('.modal').modal({
+            dismissible: false
+        });
+        $(".inputMessages").keypress(function (event) {
+            if (event.keyCode == 13) {
+                $(".sendMsgBtn").click();
+            }
+        });
+    });
+    </script>
+</head>
+
+<body ng-app="mainApp" ng-controller="mainCtrl">
+<div class="row rowMain">
+    <div class="col m9">
+        <div class="col m4"></div>
+        <div class="col m4">
+            <span class="app-title">Custom Dashboard</span>
+        </div>
+        <div class="col m4"></div>
+    </div>
+    <div class="col m3">
+        Bonjour {{ main.user }}
+        <button class="black-text" ng-click="deconnexion()">deconnexion</button>
+    </div>
+</div>
+<div class="row main rowMain">
+    <div class="row col m12 rowMain">
+        <div class="col m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/horloge.png">
+                    <span class="card-title">Horloge</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Tu peux ajouter une horloge dans cette carte.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/fb_logo.png">
+                    <span class="card-title">Facebook</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Facebook pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/twitter.png">
+                    <span class="card-title">Twitter</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Twitter pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col m12 rowMain">
+        <div class="col m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/youtube.png">
+                    <span class="card-title">YouTube</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte YouTube pour y avoir accès depuis cette carte</p>                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/g_plus.png">
+                    <span class="card-title">Google Plus</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Google Plus pour y avoir accès depuis cette carte</p>                </div>
+            </div>
+        </div>
+        <div class="col m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/github.png">
+                    <span class="card-title">Github</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Github pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row col l2 rowMain">
+</div>
+
+
+<div id="modalChannels" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Join a channel</h4>
+        <select id="selectChan" ng-model="model.chosenChannel" ng-options="x for x in model.availableChannelsList">
+        </select>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close btn-flat" ng-click="joinTab()">Join</a>
+        <a href="#!" class="modal-action modal-close btn-flat btn-cancel" ng-click="cancelJoinTab()">Cancel</a>
+    </div>
+</div>
+</body>
+
+
+</html>
