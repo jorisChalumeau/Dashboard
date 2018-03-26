@@ -13,18 +13,9 @@
     <script type="text/javascript" src="main-script.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/satellizer/0.15.5/satellizer.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>var socket = io('http://localhost:8080');
-    $(document).ready(function () {
-        $('.modal').modal({
-            dismissible: false
-        });
-        $(".inputMessages").keypress(function (event) {
-            if (event.keyCode == 13) {
-                $(".sendMsgBtn").click();
-            }
-        });
-    });
     </script>
 </head>
 
@@ -70,7 +61,7 @@
                 <div class="card-image">
                     <img src="images/fb_logo.png">
                     <span class="card-title">Facebook</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red" ng-click="authenticate('facebook')"><i class="material-icons">add</i></a>
                 </div>
                 <div class="card-content">
                     <p>Connecte-toi à ton compte Facebook pour y avoir accès depuis cette carte</p>
@@ -91,7 +82,7 @@
                 <div class="card-image">
                     <img src="images/twitter.png">
                     <span class="card-title">Twitter</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red" ng-click="authenticate('twitter')"><i class="material-icons">add</i></a>
                 </div>
                 <div class="card-content">
                     <p>Connecte-toi à ton compte Twitter pour y avoir accès depuis cette carte</p>
@@ -156,7 +147,7 @@
                 <div class="card-image">
                     <img src="images/github.png">
                     <span class="card-title">Github</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red" ng-click="authenticate('github')"><i class="material-icons">add</i></a>
                 </div>
                 <div class="card-content">
                     <p>Connecte-toi à ton compte Github pour y avoir accès depuis cette carte</p>

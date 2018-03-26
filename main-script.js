@@ -1,62 +1,136 @@
-var mainApp = angular.module('mainApp', ['ngAnimate', 'ngCookies']);
-mainApp.controller('mainCtrl', function ($scope, $cookies) {
-    if ($cookies.get('user') === undefined)
-        location.href = "/index.html";
-    $scope.main = {};
-    $scope.model = {};
-    $scope.main.user = $cookies.get('user'); // current user
-    $scope.model.authorizations = {};
-    $scope.model.tokens = {};
-    $scope.model.data = {};
+var mainApp = angular.module('mainApp', ['ngAnimate', 'ngCookies', 'satellizer']);
+mainApp.config(function($authProvider) {
+  $authProvider.httpInterceptor = function() {
+      return true;
+    }
+  $authProvider.withCredentials = false;
+  $authProvider.tokenRoot = null;
+  $authProvider.baseUrl = '/';
+  $authProvider.loginUrl = '/auth/login';
+  $authProvider.signupUrl = '/auth/signup';
+  $authProvider.unlinkUrl = '/auth/unlink/';
+  $authProvider.tokenName = 'token';
+  $authProvider.tokenPrefix = 'satellizer';
+  $authProvider.tokenHeader = 'Authorization';
+  $authProvider.tokenType = 'Bearer';
+  $authProvider.storageType = 'localStorage';
+  $authProvider.facebook({
+    name: 'facebook',
+    url: '/auth/facebook',
+    clientId: '191024228290410',
+    authorizationEndpoint: 'https://www.facebook.com/v2.5/dialog/oauth',
+    redirectUri: window.location.origin + '/',
+    requiredUrlParams: ['display', 'scope'],
+    scope: ['email'],
+    scopeDelimiter: ',',
+    display: 'popup',
+    oauthType: '2.0',
+    popupOptions: {
+      width: 580,
+      height: 400
+    }
+  });
+  
+  $authProvider.twitter({
+  url: '/auth/twitter',
+  authorizationEndpoint: 'https://api.twitter.com/oauth/authenticate',
+  redirectUri: window.location.origin,
+  oauthType: '1.0',
+  popupOptions: { width: 495, height: 645 }
+});
 
-    socket.emit("getAuthorizations", [$scope.main.user]);
+  $authProvider.google({
+    clientId: 'Google Client ID'
+  });
+  $authProvider.github({
+    url: '/auth/github',
+    clientId: '6bd02f61d81ac833e4c4',
+    authorizationEndpoint: 'https://api.github.com/login/oauth/authorize',
+    optionalUrlParams: ['scope'],
+    scope: ['user:email'],
+    scopeDelimiter: ' ',
+    oauthType: '2.0',
+    popupOptions: { width: 1020, height: 618 }
+  });
 
-    // lorsqu'on se déconnecte du serveur
-    $scope.deconnexion = function () {
-        $cookies.remove('user');
-        location.href = ('/index.html');
-    };
-    $scope.fillData = function (key, token) {
-        // fill the corresponding dashboard
-        switch (key) {
-            case "horloge":
-                break;
-            case "facebook":
-                break;
-            case "twitter":
-                break;
-            case "youtube":
-                break;
-            case "gplus":
-                break;
-            case "github":
-                break;
-            default:
-        }
-        $scope.model.data[key] = $scope.getContent(token);
-    };
-    $scope.getContent = function(token) {
+  $authProvider.linkedin({
+    clientId: 'LinkedIn Client ID'
+  });
+  $authProvider.spotify({
+    clientId: 'Spotify Client ID'
+  });
 
-    };
-    socket.on("authorizations", function (params) {
-        $scope.$apply(function () {
-            $scope.model.authorizations = params[0];
-            var token;
-            for (var key in $scope.model.authorizations) {
-                if (!$scope.model.authorizations.hasOwnProperty(key))
-                    continue;
-                token = $scope.model.authorizations[key];
-                if (token != null)
-                    $scope.fillData(key, token);
-            }
-        });
+  // No additional setup required for Twitter
+
+  $authProvider.oauth2({
+    name: 'foursquare',
+    url: '/auth/foursquare',
+    clientId: 'Foursquare Client ID',
+    redirectUri: window.location.origin,
+    authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate',
+  });
+});
+
+mainApp.controller('mainCtrl', function($scope, $cookies, $auth) {
+  if ($cookies.get('user') === undefined)
+    location.href = "/index.html";
+  $scope.authenticate = function(provider) {
+    $auth.authenticate(provider);
+  };
+  $scope.main = {};
+  $scope.model = {};
+  $scope.main.user = $cookies.get('user'); // current user
+  $scope.model.authorizations = {};
+  $scope.model.tokens = {};
+  $scope.model.data = {};
+
+  socket.emit("getAuthorizations", [$scope.main.user]);
+  // lorsqu'on se déconnecte du serveur
+  $scope.deconnexion = function() {
+    $cookies.remove('user');
+    location.href = ('/index.html');
+  };
+  $scope.fillData = function(key, token) {
+    // fill the corresponding dashboard
+    switch (key) {
+      case "horloge":
+        break;
+      case "facebook":
+        break;
+      case "twitter":
+        break;
+      case "youtube":
+        break;
+      case "gplus":
+        break;
+      case "github":
+        break;
+      default:
+    }
+    $scope.model.data[key] = $scope.getContent(token);
+  };
+  $scope.getContent = function(token) {
+
+  };
+  socket.on("authorizations", function(params) {
+    $scope.$apply(function() {
+      $scope.model.authorizations = params[0];
+      var token;
+      for (var key in $scope.model.authorizations) {
+        if (!$scope.model.authorizations.hasOwnProperty(key))
+          continue;
+        token = $scope.model.authorizations[key];
+        if (token != null)
+          $scope.fillData(key, token);
+      }
     });
-    socket.on("connexionProblem", function () {
-        $scope.$apply(function () {
-            // user was removed from db => kick user from server
-            $scope.deconnexion();
-        });
+  });
+  socket.on("connexionProblem", function() {
+    $scope.$apply(function() {
+      // user was removed from db => kick user from server
+      $scope.deconnexion();
     });
+  });
 });
 
 
