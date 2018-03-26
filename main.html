@@ -44,162 +44,138 @@
 </div>
 <div class="row main rowMain">
     <div class="row col m12 rowMain">
-        <div class="col m4" *ngIf="model.authorizations.length == 0 || model.authorizations['horloge'] == null; then horlogeEmpty; else horlogeData">
+        <div class="col m4" ng-if="model.authorizations.length == 0 || model.authorizations['horloge'] == null">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/horloge.png">
+                    <span class="card-title">Horloge</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Tu peux ajouter une horloge dans cette carte.</p>
+                </div>
+            </div>
         </div>
-        <div class="col m4" *ngIf="model.authorizations.length == 0 || model.authorizations['facebook'] == null; then facebookEmpty; else facebookData">
+        <div class="col m4" ng-if="!(model.authorizations.length == 0 || model.authorizations['horloge'] == null)">
+            <div class="card">
+                <div class="card-image">
+                </div>
+                <div class="card-content">
+                    <p>Horloge data</p>
+                </div>
+            </div>
         </div>
-        <div class="col m4" *ngIf="model.authorizations.length == 0 || model.authorizations['twitter'] == null; then twitterEmpty; else twitterData">
+        <div class="col m4" ng-if="model.authorizations.length == 0 || model.authorizations['facebook'] == null">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/fb_logo.png">
+                    <span class="card-title">Facebook</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Facebook pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4" ng-if="!(model.authorizations.length == 0 || model.authorizations['facebook'] == null)">
+            <div class="card">
+                <div class="card-image">
+                </div>
+                <div class="card-content">
+                    <p>Facebook data</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4" ng-if="model.authorizations.length == 0 || model.authorizations['twitter'] == null">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/twitter.png">
+                    <span class="card-title">Twitter</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Twitter pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4" ng-if="!(model.authorizations.length == 0 || model.authorizations['twitter'] == null)">
+            <div class="card">
+                <div class="card-image">
+                </div>
+                <div class="card-content">
+                    <p>Twitter data</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row col m12 rowMain">
-        <div class="col m4" *ngIf="model.authorizations.length == 0 || model.authorizations['youtube'] == null; then youtubeEmpty; else youtubeData">
+        <div class="col m4" ng-if="model.authorizations.length == 0 || model.authorizations['youtube'] == null">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/youtube.png">
+                    <span class="card-title">Youtube</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte YouTube pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
         </div>
-        <div class="col m4" *ngIf="model.authorizations.length == 0 || model.authorizations['gplus'] == null; then gplusEmpty; else gplusData">
+        <div class="col m4" ng-if="!(model.authorizations.length == 0 || model.authorizations['youtube'] == null)">
+            <div class="card">
+                <div class="card-image">
+                </div>
+                <div class="card-content">
+                    <p>Youtube data</p>
+                </div>
+            </div>
         </div>
-        <div class="col m4" *ngIf="model.authorizations.length == 0 || model.authorizations['github'] == null; then githubEmpty; else githubData">
+        <div class="col m4" ng-if="model.authorizations.length == 0 || model.authorizations['youtube'] == null">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/g_plus.png">
+                    <span class="card-title">Google Plus</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Google Plus pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4" ng-if="!(model.authorizations.length == 0 || model.authorizations['youtube'] == null)">
+            <div class="card">
+                <div class="card-image">
+                </div>
+                <div class="card-content">
+                    <p>Gplus data</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4" ng-if="model.authorizations.length == 0 || model.authorizations['github'] == null">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/github.png">
+                    <span class="card-title">Github</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Connecte-toi à ton compte Github pour y avoir accès depuis cette carte</p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4" ng-if="!(model.authorizations.length == 0 || model.authorizations['github'] == null)">
+            <div class="card">
+                <div class="card-image">
+                </div>
+                <div class="card-content">
+                    <p>Github data</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="row col l2 rowMain">
 </div>
-
-<!-- horloge card content -->
-<ng-template #horlogeEmpty>
-    <div class="card">
-        <div class="card-image">
-            <img src="images/horloge.png">
-            <span class="card-title">Horloge</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <p>Tu peux ajouter une horloge dans cette carte.</p>
-        </div>
-    </div>
-</ng-template>
-<ng-template #horlogeData>
-    <div class="card">
-        <div class="card-image">
-        </div>
-        <div class="card-content">
-            <p>Horloge data</p>
-        </div>
-    </div>
-</ng-template>
-
-<!-- facebook card content -->
-<ng-template #facebookEmpty>
-    <div class="card">
-        <div class="card-image">
-            <img src="images/horloge.png">
-            <span class="card-title">Facebook</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <p>Connecte-toi à ton compte Facebook pour y avoir accès depuis cette carte</p>
-        </div>
-    </div>
-</ng-template>
-<ng-template #facebookData>
-    <div class="card">
-        <div class="card-image">
-        </div>
-        <div class="card-content">
-            <p>Facebook data</p>
-        </div>
-    </div>
-</ng-template>
-
-<!-- twitter card content -->
-<ng-template #twitterEmpty>
-    <div class="card">
-        <div class="card-image">
-            <img src="images/twitter.png">
-            <span class="card-title">Twitter</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <p>Connecte-toi à ton compte Twitter pour y avoir accès depuis cette carte</p>
-        </div>
-    </div>
-</ng-template>
-<ng-template #twitterData>
-    <div class="card">
-        <div class="card-image">
-        </div>
-        <div class="card-content">
-            <p>twitter data</p>
-        </div>
-    </div>
-</ng-template>
-
-<!-- youtube card content -->
-<ng-template #youtubeEmpty>
-    <div class="card">
-        <div class="card-image">
-            <img src="images/youtube.png">
-            <span class="card-title">Youtube</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <p>Connecte-toi à ton compte YouTube pour y avoir accès depuis cette carte</p>
-        </div>
-    </div>
-</ng-template>
-<ng-template #youtubeData>
-    <div class="card">
-        <div class="card-image">
-        </div>
-        <div class="card-content">
-            <p>Youtube data</p>
-        </div>
-    </div>
-</ng-template>
-
-<!-- gplus card content -->
-<ng-template #gplusEmpty>
-    <div class="card">
-        <div class="card-image">
-            <img src="images/g_plus.png">
-            <span class="card-title">Google Plus</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <p>Connecte-toi à ton compte Google Plus pour y avoir accès depuis cette carte</p>
-        </div>
-    </div>
-</ng-template>
-<ng-template #gplusData>
-    <div class="card">
-        <div class="card-image">
-        </div>
-        <div class="card-content">
-            <p>Gplus data</p>
-        </div>
-    </div>
-</ng-template>
-
-<!-- github card content -->
-<ng-template #githubEmpty>
-    <div class="card">
-        <div class="card-image">
-            <img src="images/github.png">
-            <span class="card-title">Github</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <p>Connecte-toi à ton compte Github pour y avoir accès depuis cette carte</p>
-        </div>
-    </div>
-</ng-template>
-<ng-template #githubData>
-    <div class="card">
-        <div class="card-image">
-        </div>
-        <div class="card-content">
-            <p>Github data</p>
-        </div>
-    </div>
-</ng-template>
 
 
 <!-- fenêtres modales -->
