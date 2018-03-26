@@ -162,8 +162,8 @@ io.sockets.on('connection', function(socket) {
       if (name[0].count <= 0) {
         socket.emit("connexionProblem"); // kick user
       } else {
-        var sql = "Select TokenHorloge, TokenFacebook, TokenTwitter," +
-            " TokenYoutube, TokenGooglePlus, TokenGithub " +
+        var sql = "Select horloge, facebook, twitter," +
+            " youtube, gplus, github " +
             "from User where Name='" + params[0] + "';";
         con.query(sql, function(err, tokens) {
           if (err) throw err;

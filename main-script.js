@@ -5,8 +5,9 @@ mainApp.controller('mainCtrl', function ($scope, $cookies) {
     $scope.main = {};
     $scope.model = {};
     $scope.main.user = $cookies.get('user'); // current user
-    $scope.model.authorizations = [];
+    $scope.model.authorizations = {};
     $scope.model.tokens = {};
+    $scope.model.data = {};
 
     socket.emit("getAuthorizations", [$scope.main.user]);
 
@@ -16,7 +17,26 @@ mainApp.controller('mainCtrl', function ($scope, $cookies) {
         location.href = ('/index.html');
     };
     $scope.fillData = function (key, token) {
-        // TODO : to fill respective dashboards
+        // fill the corresponding dashboard
+        switch (key) {
+            case "horloge":
+                break;
+            case "facebook":
+                break;
+            case "twitter":
+                break;
+            case "youtube":
+                break;
+            case "gplus":
+                break;
+            case "github":
+                break;
+            default:
+        }
+        $scope.model.data[key] = $scope.getContent(token);
+    };
+    $scope.getContent = function(token) {
+
     };
     socket.on("authorizations", function (params) {
         $scope.$apply(function () {
